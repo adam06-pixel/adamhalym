@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Adam Halym | Professional Portfolio</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#030712; --white:#FFFFFF; --muted:#9CA3AF; --accent:#3B82F6;
+  --glass:rgba(255,255,255,.05); --glass-line:rgba(255,255,255,.12);
+  --card:#0b1220; --glow:0 0 28px rgba(59,130,246,.55);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:110px}
+body{
+  font-family:'Cairo',sans-serif;background:var(--bg);color:var(--muted);
+  overflow-x:hidden;min-height:100vh;line-height:1.7;position:relative;
+}
+body.lang-en,body.lang-it,body.lang-fr{font-family:'Poppins',sans-serif}
+body.lang-ar{font-family:'Cairo',sans-serif}
+
+/* Space background */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(circle at 0% 0%,rgba(59,130,246,.28),transparent 42%),
+    radial-gradient(circle at 100% 100%,rgba(59,130,246,.24),transparent 45%),
+    radial-gradient(circle at 100% 0%,rgba(59,130,246,.10),transparent 35%),
+    radial-gradient(1.5px 1.5px at 12% 22%,#fff,transparent),
+    radial-gradient(1px 1px at 38% 70%,#cbd5e1,transparent),
+    radial-gradient(1.5px 1.5px at 62% 14%,#fff,transparent),
+    radial-gradient(1px 1px at 82% 48%,#cbd5e1,transparent),
+    radial-gradient(1px 1px at 26% 90%,#fff,transparent),
+    radial-gradient(1.5px 1.5px at 92% 82%,#cbd5e1,transparent),
+    var(--bg);
+}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* ===== Floating glass navbar ===== */
+.navbar{
+  position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:1000;
+  width:min(1080px,calc(100% - 28px));padding:10px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  background:rgba(10,15,30,.85);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--glass-line);border-radius:50px;
+  box-shadow:0 10px 40px rgba(0,0,0,.45),inset 0 0 0 1px rgba(59,130,246,.06);
+}
+.logo{font-family:'Poppins',sans-serif;font-weight:800;font-size:1.25rem;color:var(--white); margin-inline-end: 5px; white-space: nowrap;}
+.logo b{color:var(--accent)}
+
+/* قائمة الروابط وزر اللغة معاً */
+.nav-menu-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 15px;
+  flex: 1;
+}
+.nav-links{display:flex;gap:4px;list-style:none; margin:0; padding:0;}
+.nav-links a{display:block;padding:7px 12px;border-radius:30px;font-weight:600;font-size:.9rem;color:var(--muted);transition:.3s; white-space: nowrap;}
+.nav-links a:hover{color:var(--white);background:rgba(59,130,246,.15)}
+.nav-links a.active{color:var(--white);background:rgba(59,130,246,.22);box-shadow:inset 0 0 0 1px rgba(59,130,246,.5)}
+
+/* Language Dropdown */
+.lang-dropdown { position: relative; display: inline-block; }
+.lang-dropdown-btn {
+  background: rgba(255,255,255,.06); border: 1px solid var(--glass-line);
+  color: var(--white); padding: 6px 12px; border-radius: 30px;
+  cursor: pointer; font-weight: 700; font-size: 0.85rem; font-family: inherit;
+  display: flex; align-items: center; gap: 5px; transition: 0.3s; white-space: nowrap;
+}
+.lang-dropdown-btn:hover { background: rgba(59,130,246,.2); border-color: var(--accent); }
+.lang-dropdown-content {
+  display: none; position: absolute; top: 130%; left: 50%; transform: translateX(-50%);
+  background: rgba(10,15,30,.95); backdrop-filter: blur(10px);
+  min-width: 110px; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+  border: 1px solid var(--glass-line); border-radius: 12px;
+  z-index: 1001; overflow: hidden;
+}
+.lang-dropdown-content a {
+  color: var(--muted); padding: 10px 16px; text-decoration: none;
+  display: block; font-size: 0.85rem; font-weight: 600; transition: 0.2s;
+  text-align: center;
+}
+.lang-dropdown-content a:hover { background: var(--accent); color: var(--white); }
+.lang-dropdown:hover .lang-dropdown-content { display: block; }
+
+/* ===== Hero ===== */
+.hero{min-height:100vh;padding:120px 24px 60px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.hero-grid{
+  direction:rtl;
+  width:min(1120px,100%);display:grid;grid-template-columns:1.1fr 0.9fr;align-items:center;gap:40px;position:relative;z-index:2;
+}
+.hero-text{direction:rtl;text-align:right; z-index: 3;}
+html[dir=ltr] .hero-text{direction:ltr;text-align:left}
+.hero h1{
+  font-family:'Poppins',sans-serif;font-weight:900;direction:ltr;text-align:inherit;
+  font-size:clamp(3rem,8.2vw,6.6rem);line-height:1.04;letter-spacing:-.03em;margin-bottom:22px;
+}
+.hero h1 span{display:block}
+.hero h1 .w1{color:var(--accent);text-shadow:0 0 40px rgba(59,130,246,.45)}
+.hero h1 .w2{color:var(--white)}
+.hero-name{font-size:1.5rem;font-weight:800;color:var(--white)}
+.hero h2{font-size:1.25rem;font-weight:700;color:var(--muted);min-height:2.2rem;margin:4px 0 30px}
+#typed-text{color:var(--accent)}
+.typing-cursor{display:inline-block;width:2px;height:1.1em;background:var(--accent);margin:0 4px;vertical-align:middle;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero-buttons{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 28px;border-radius:14px;font-weight:700;font-size:1rem;font-family:inherit;cursor:pointer;transition:.3s}
+.btn-primary{background:var(--accent);color:var(--white);border:1px solid var(--accent)}
+.btn-primary:hover{box-shadow:var(--glow);transform:translateY(-2px)}
+.btn-secondary{background:rgba(255,255,255,.04);color:var(--white);border:1px solid var(--glass-line);backdrop-filter:blur(10px)}
+.btn-secondary:hover{border-color:var(--accent);box-shadow:0 0 18px rgba(59,130,246,.35);transform:translateY(-2px)}
+
+/* ===== Hanging ID card ===== */
+.card-stage{
+  display: flex; justify-content: center; align-items: flex-start;
+  position: relative; z-index: 1; height: 100%;
+}
+.hanger{
+  transform-origin: 50% 0;
+  animation: swing 5s ease-in-out infinite alternate;
+  display: flex; flex-direction: column; align-items: center;
+  margin-top: -120px; 
+}
+@keyframes swing{0%{transform:rotate(-4deg)}100%{transform:rotate(4deg)}}
+
+.lanyard{
+  width:24px; height:300px; 
+  background:repeating-linear-gradient(180deg,#1d4ed8 0 14px,#2563eb 14px 28px);
+  border-inline:2px solid rgba(255,255,255,.18);border-radius:0 0 3px 3px;
+  box-shadow:0 0 18px rgba(59,130,246,.45);position:relative;
+}
+.lanyard::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.25),transparent 40%,rgba(0,0,0,.25))}
+.clip{width:46px;height:26px;margin-top:-2px;border-radius:5px 5px 12px 12px;background:linear-gradient(180deg,#e5e7eb,#6b7280);box-shadow:0 4px 10px rgba(0,0,0,.5);position:relative;z-index:2}
+.clip::after{content:"";position:absolute;left:50%;bottom:-10px;width:12px;height:16px;transform:translateX(-50%);border:3px solid #9ca3af;border-top:0;border-radius:0 0 8px 8px}
+.id-card{
+  direction:ltr;width:290px;margin-top:6px;border-radius:24px;overflow:hidden;position:relative;
+  background:linear-gradient(160deg,#0f1a33,#070d1d 60%);
+  border:1px solid rgba(96,165,250,.45);
+  box-shadow:0 30px 70px rgba(0,0,0,.75),0 0 55px rgba(59,130,246,.5),inset 0 0 0 1px rgba(255,255,255,.05);
+}
+.id-slot{width:64px;height:9px;border-radius:9px;background:#030712;margin:14px auto 12px;box-shadow:inset 0 1px 3px #000,0 0 0 1px rgba(255,255,255,.1)}
+.id-photo{position:relative;margin:0 14px;border-radius:16px;overflow:hidden;aspect-ratio:1/1.08;background:radial-gradient(circle at 50% 100%,rgba(59,130,246,.7),rgba(30,58,138,.55) 55%,#0a1226)}
+.id-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 100%;display:block}
+.ribbon{
+  position:absolute;top:22px;left:-52px;width:190px;padding:5px 0;text-align:center;transform:rotate(-38deg);
+  background:var(--accent);color:var(--white);font:800 .78rem 'Poppins',sans-serif;letter-spacing:.22em;
+  box-shadow:0 4px 14px rgba(0,0,0,.45),0 0 18px rgba(59,130,246,.7)
+}
+.id-info{padding:14px 18px 18px;text-align:center}
+.id-info strong{display:block;color:var(--white);font-size:1.15rem;font-weight:800}
+.id-info small{display:block;color:var(--accent);font:600 .78rem 'Poppins',sans-serif;margin-top:2px}
+.barcode{height:26px;margin-top:12px;border-radius:3px;opacity:.7;background:repeating-linear-gradient(90deg,#9CA3AF 0 2px,transparent 2px 5px,#9CA3AF 5px 6px,transparent 6px 9px,#9CA3AF 9px 12px,transparent 12px 14px)}
+
+/* ===== Sections ===== */
+.section{width:min(1120px,calc(100% - 40px));margin:0 auto;padding:80px 0 20px}
+.section-title{text-align:center;margin-bottom:44px}
+.section-title h3{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;color:var(--white)}
+.section-title::after{content:"";display:block;width:70px;height:4px;border-radius:4px;background:var(--accent);margin:14px auto 0;box-shadow:var(--glow)}
+.about-text{text-align:center;font-size:1.15rem;max-width:800px;margin:0 auto;color:var(--muted);line-height:1.9}
+
+/* Tabs */
+.tabs{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:38px}
+.tab-btn{display:inline-flex;align-items:center;gap:9px;padding:11px 26px;border-radius:50px;cursor:pointer;font:700 1rem inherit;font-family:inherit;color:var(--muted);background:var(--glass);border:1px solid var(--glass-line);transition:.3s}
+.tab-btn:hover{color:var(--white);border-color:var(--accent)}
+.tab-btn.active{background:var(--accent);border-color:var(--accent);color:var(--white);box-shadow:var(--glow)}
+.tab-panel{display:none}
+.tab-panel.active{display:block;animation:panelIn .45s ease}
+@keyframes panelIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.exp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.exp-card{background:var(--glass);border:1px solid var(--glass-line);border-radius:22px;padding:28px;backdrop-filter:blur(12px);transition:.3s}
+.exp-card:hover{border-color:rgba(59,130,246,.6);box-shadow:var(--glow)}
+.exp-card h4{color:var(--white);font-size:1.15rem;font-weight:800;margin-bottom:6px}
+.exp-card .company{display:inline-block;color:var(--accent);font-weight:700;font-size:.95rem}
+.exp-card .period{font-size:.85rem;margin:2px 0 14px}
+.exp-card ul{list-style:none}
+.exp-card li{position:relative;padding-inline-start:20px;margin-bottom:8px;font-size:.95rem}
+.exp-card li::before{content:"";position:absolute;inset-inline-start:0;top:.7em;width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent)}
+
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.cert-card{background:rgba(255,255,255,.04);border:1px solid var(--glass-line);border-radius:20px;padding:24px 20px;text-align:center;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:.3s}
+.cert-card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:var(--glow)}
+.cert-card i{font-size:1.9rem;color:var(--accent);margin-bottom:10px}
+.cert-card h4{color:var(--white);font-size:1.05rem;font-weight:700;direction:ltr;line-height:1.4}
+.cert-card .issuer{font-size:.9rem;direction:ltr;margin-top:4px;color:var(--accent)}
+.cert-card .date{font-size:.82rem;margin-top:10px;opacity:.8}
+
+.skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.skill-card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:30px 14px;text-align:center;transition:.3s}
+.skill-card:hover{border-color:var(--accent);box-shadow:var(--glow);transform:translateY(-4px)}
+.skill-card i{font-size:2.3rem;color:var(--accent);margin-bottom:14px;display:block;filter:drop-shadow(0 0 10px rgba(59,130,246,.55))}
+.skill-card h4{color:var(--white);font-size:1rem;font-weight:700}
+
+.testimonials-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.testimonial{background:var(--glass);border:1px solid var(--glass-line);border-radius:22px;padding:28px;backdrop-filter:blur(12px);transition:.3s;display:flex;flex-direction:column;gap:18px}
+.testimonial:last-child:nth-child(odd){grid-column:1/-1}
+.testimonial:hover{border-color:rgba(59,130,246,.6);box-shadow:var(--glow)}
+.testimonial .q{color:var(--accent);font-size:1.4rem}
+.testimonial .t-text{color:#d1d5db;font-size:.98rem;line-height:1.7}
+.testimonial figcaption h4{color:var(--white);font-size:1.02rem}
+.testimonial figcaption span{font-size:.85rem;color:var(--accent)}
+
+.contact-options{display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
+.contact-btn{display:flex;flex-direction:column;align-items:center;gap:10px;min-width:170px;padding:28px 30px;border-radius:22px;background:var(--glass);border:1px solid var(--glass-line);color:var(--white);font-weight:700;backdrop-filter:blur(12px);transition:.3s}
+.contact-btn i{font-size:2rem;color:var(--accent)}
+.contact-btn:hover{border-color:var(--accent);box-shadow:var(--glow);transform:translateY(-4px)}
+
+footer{margin-top:80px;padding:44px 20px 50px;text-align:center;border-top:1px solid var(--glass-line);background:linear-gradient(180deg,transparent,rgba(59,130,246,.07))}
+footer h3{color:var(--white);font-weight:800;margin-bottom:16px}
+.social-icons{display:flex;justify-content:center;gap:14px}
+.social-icons a{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;color:var(--white);background:var(--glass);border:1px solid var(--glass-line);transition:.3s}
+.social-icons a:hover{background:var(--accent);box-shadow:var(--glow)}
+footer p{margin-top:20px;font-size:.9rem}
+
+#toTop{display:none;position:fixed;bottom:24px;inset-inline-end:24px;width:48px;height:48px;border-radius:50%;border:0;cursor:pointer;align-items:center;justify-content:center;background:var(--accent);color:var(--white);box-shadow:var(--glow);z-index:900}
+
+/* ===== Responsive ===== */
+@media(max-width:900px){
+  .navbar{
+    padding: 8px 12px; 
+    gap: 5px;
+    width: calc(100% - 20px);
+    flex-wrap: nowrap;
+    overflow-x: auto; /* يسمح بالتمرير الأفقي إذا ضاقت الشاشة */
+    scrollbar-width: none; /* إخفاء شريط التمرير */
+  }
+  .navbar::-webkit-scrollbar { display: none; }
+  
+  .logo { display: none; } /* إخفاء الشعار لتوفير مساحة */
+
+  .nav-menu-wrapper {
+    width: 100%;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 5px;
+  }
+  
+  .nav-links{
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+    gap: 2px;
+  }
+  .nav-links::-webkit-scrollbar{display:none}
+  .nav-links a{ padding: 6px 10px; font-size: 0.85rem; }
+  
+  .lang-dropdown { margin-inline-start: 5px; }
+  .lang-dropdown-btn { padding: 6px 10px; font-size: 0.8rem; }
+
+  .hero{padding-top:140px; padding-bottom: 40px; min-height: auto;}
+  .hero-grid{display: flex; flex-direction: column; gap: 20px; text-align: center;}
+  
+  .card-stage{ order: -1; margin-bottom: 20px; }
+  .hanger { margin-top: -100px; }
+  .lanyard{height: 180px;}
+  
+  .hero-text,html[dir=ltr] .hero-text{text-align:center}
+  .hero h1{text-align:center; font-size: 2.8rem;}
+  .hero-buttons{justify-content:center}
+  
+  .skills-grid{grid-template-columns:repeat(2,1fr)}
+  .exp-grid,.testimonials-grid{grid-template-columns:1fr}
+  .about-text { font-size: 1rem; padding: 0 10px;}
+}
+@media(max-width:420px){
+  .id-card{width:250px}
+  .lanyard{height: 120px;}
+  .hero h1{font-size: 2.2rem;}
+  .section{width:calc(100% - 28px)}
+  .tab-btn{padding:10px 18px;font-size:.9rem; width: 100%; justify-content: center;}
+  .contact-btn{min-width:calc(50% - 9px);padding:22px 14px}
+}
+@media(prefers-reduced-motion:reduce){
+  .hanger{animation:none}.tab-panel.active{animation:none}.typing-cursor{animation:none}html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body class="lang-ar">
+
+<nav class="navbar">
+  <a href="#home" class="logo">Adam<b>.</b></a>
+  
+  <!-- تجميع الروابط وزر اللغة في سطر واحد -->
+  <div class="nav-menu-wrapper">
+    <ul class="nav-links">
+      <li><a href="#about" data-i18n="nav_about">عني</a></li>
+      <li><a href="#showcase" data-tab="experience" data-i18n="nav_experience">الخبرات</a></li>
+      <li><a href="#showcase" data-tab="certifications" data-i18n="nav_certifications">الشهادات</a></li>
+      <li><a href="#showcase" data-tab="skills" data-i18n="nav_skills">المهارات</a></li>
+      <li><a href="#contact" data-i18n="nav_contact">تواصل</a></li>
+    </ul>
+
+    <div class="lang-dropdown">
+      <button class="lang-dropdown-btn">
+        <i class="fas fa-globe"></i> <span id="current-lang-text">عربي</span>
+      </button>
+      <div class="lang-dropdown-content">
+        <a href="#" onclick="changeLanguage('ar'); return false;">عربي</a>
+        <a href="#" onclick="changeLanguage('en'); return false;">English</a>
+        <a href="#" onclick="changeLanguage('fr'); return false;">Français</a>
+        <a href="#" onclick="changeLanguage('it'); return false;">Italiano</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <h1><span class="w1">Welcome to</span><span class="w2">My Portfolio</span></h1>
+      <div class="hero-name" data-i18n="name">آدم حليم</div>
+      <h2><span id="typed-text"></span><span class="typing-cursor"></span></h2>
+      <div class="hero-buttons">
+        <a href="https://www.linkedin.com/in/adam-halym-3026343aa" target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-linkedin"></i> <span data-i18n="linkedin">لينكد إن</span></a>
+        <a href="#about" class="btn btn-secondary"><i class="fas fa-user"></i> <span data-i18n="about_btn">من أنا</span></a>
+      </div>
+    </div>
+
+    <div class="card-stage">
+      <div class="hanger">
+        <div class="lanyard"></div>
+        <div class="clip"></div>
+        <div class="id-card">
+          <div class="id-slot"></div>
+          <div class="id-photo">
+            <img src="adam.png" alt="Adam Halym">
+            <div class="ribbon">DEVELOPER</div>
+          </div>
+          <div class="id-info">
+            <strong data-i18n="name">آدم حليم</strong>
+            <small>Adam Halym</small>
+            <div class="barcode"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="about" class="section">
+  <div class="section-title"><h3 data-i18n="about_title">نبذة عني</h3></div>
+  <p class="about-text" data-i18n="about_text">أنا آدم حليم، محترف متميز في مجال تكنولوجيا المعلومات والاتصالات. أجمع بين مهارات البرمجة وتطوير الويب، وأجيد استخدام وتوظيف الذكاء الاصطناعي في بيئة العمل لزيادة الإنتاجية وتقديم حلول مبتكرة. أمتلك خبرة واسعة في دعم العملاء وحل التحديات التقنية والبرمجية المعقدة لتحويلها إلى نتائج ملموسة.</p>
+</section>
+
+<section id="showcase" class="section">
+  <div class="tabs" role="tablist">
+    <button class="tab-btn active" role="tab" data-tab="experience"><i class="fas fa-briefcase"></i><span data-i18n="nav_experience">الخبرات</span></button>
+    <button class="tab-btn" role="tab" data-tab="certifications"><i class="fas fa-certificate"></i><span data-i18n="nav_certifications">الشهادات</span></button>
+    <button class="tab-btn" role="tab" data-tab="skills"><i class="fas fa-microchip"></i><span data-i18n="nav_skills">المهارات</span></button>
+  </div>
+
+  <div class="tab-panel active" id="tab-experience" role="tabpanel">
+    <div class="section-title"><h3 data-i18n="experience_title">الخبرات والمشاريع القوية</h3></div>
+    <div class="exp-grid">
+            <article class="exp-card">
+                <h4 data-i18n="exp1_title">إدراج الذكاء الاصطناعي لتسريع حل مشاكل العملاء</h4>
+                <span class="company" data-i18n="exp1_company">مشروع مستقل</span>
+                <div class="period" data-i18n="exp1_period">2025 - حتى الآن</div>
+                <ul>
+                    <li data-i18n="exp1_desc1">استخدام أدوات الذكاء الاصطناعي لتحليل شكاوى العملاء وتقديم حلول فورية.</li>
+                    <li data-i18n="exp1_desc2">تقليل وقت معالجة المشاكل التقنية بنسبة كبيرة عبر أتمتة الردود.</li>
+                    <li data-i18n="exp1_desc3">تحسين تجربة العملاء وزيادة معدل رضاهم من خلال الدعم الذكي.</li>
+                </ul>
+            </article>
+
+            <article class="exp-card">
+                <h4 data-i18n="exp2_title">حل مشاكل العملاء باحترافية (الدعم عن بُعد)</h4>
+                <span class="company" data-i18n="exp2_company">خدمات الدعم المستقل</span>
+                <div class="period" data-i18n="exp2_period">2022 - حتى الآن</div>
+                <ul>
+                    <li data-i18n="exp2_desc1">تقديم دعم فني فوري للعملاء عن بُعد باستخدام برامج مثل TeamViewer و AnyDesk.</li>
+                    <li data-i18n="exp2_desc2">تشخيص وإصلاح الأعطال البرمجية وأنظمة التشغيل والشبكات بدقة عالية.</li>
+                    <li data-i18n="exp2_desc3">تحقيق رضا العملاء من خلال سرعة الاستجابة وحل المشاكل التقنية المعقدة.</li>
+                </ul>
+            </article>
+
+            <article class="exp-card">
+                <h4 data-i18n="exp3_title">برمجة موقع لثانوية خاص بالتلاميذ</h4>
+                <span class="company" data-i18n="exp3_company">مشروع تطوير ويب</span>
+                <div class="period" data-i18n="exp3_period">2024</div>
+                <ul>
+                    <li data-i18n="exp3_desc1">تصميم وتطوير منصة رقمية متكاملة للطلاب والمعلمين.</li>
+                    <li data-i18n="exp3_desc2">تحسين تجربة التلاميذ الرقمية من خلال واجهة سهلة وبسيطة.</li>
+                    <li data-i18n="exp3_desc3">تسهيل الوصول إلى الموارد التعليمية والأنشطة المدرسية.</li>
+                </ul>
+            </article>
+
+            <article class="exp-card">
+                <h4 data-i18n="exp4_title">برمجة وتحسين المواقع الشخصية</h4>
+                <span class="company" data-i18n="exp4_company">مشاريع متنوعة (Freelance)</span>
+                <div class="period" data-i18n="exp4_period">2023 - حتى الآن</div>
+                <ul>
+                    <li data-i18n="exp4_desc1">تطوير وتحسين بورتفوليو شخصي وعارض أعمال (Portfolio) احترافي.</li>
+                    <li data-i18n="exp4_desc2">تحسين سرعة تحميل المواقع وتجربة المستخدم (UI/UX).</li>
+                    <li data-i18n="exp4_desc3">تخصيص التصاميم لتناسب هوية كل عميل ومتطلباته.</li>
+                </ul>
+            </article>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-certifications" role="tabpanel">
+    <div class="section-title"><h3 data-i18n="certs_title">الشهادات</h3></div>
+    <div class="cert-grid">
+            <article class="cert-card"><i class="fas fa-server"></i><h4>Information Technology Fundamentals</h4><p class="issuer">IBM SkillsBuild</p><p class="date">6 فبراير 2026</p></article>
+            <article class="cert-card"><i class="fas fa-laptop-code"></i><h4>Business Communications</h4><p class="issuer">HP LIFE</p><p class="date">12 يونيو 2026</p></article>
+            <article class="cert-card"><i class="fas fa-network-wired"></i><h4>IT Customer Support Basics</h4><p class="issuer">Cisco Networking Academy</p><p class="date">2026</p></article>
+            <article class="cert-card"><i class="fab fa-google"></i><h4>Google IT Support Professional</h4><p class="issuer">Google</p><p class="date">2025</p></article>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-skills" role="tabpanel">
+    <div class="section-title"><h3 data-i18n="skills_title">المهارات</h3></div>
+    <div class="skills-grid">
+            <div class="skill-card"><i class="fas fa-headset"></i><h4 data-i18n="skill1">دعم العملاء</h4></div>
+            <div class="skill-card"><i class="fas fa-comments"></i><h4 data-i18n="skill2">التواصل المؤسسي</h4></div>
+            <div class="skill-card"><i class="fas fa-network-wired"></i><h4 data-i18n="skill3">أساسيات الشبكات</h4></div>
+            <div class="skill-card"><i class="fas fa-tools"></i><h4 data-i18n="skill4">حل المشاكل</h4></div>
+            <div class="skill-card"><i class="fas fa-cloud"></i><h4 data-i18n="skill5">الحوسبة السحابية</h4></div>
+            <div class="skill-card"><i class="fas fa-shield-halved"></i><h4 data-i18n="skill6">الأمن السيبراني</h4></div>
+            <div class="skill-card"><i class="fas fa-database"></i><h4 data-i18n="skill7">إدارة قواعد البيانات</h4></div>
+            <div class="skill-card"><i class="fas fa-code"></i><h4 data-i18n="skill8">أساسيات البرمجة</h4></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-title"><h3 data-i18n="testimonials_title">آراء العملاء</h3></div>
+  <div class="testimonials-grid">
+            <figure class="testimonial"><i class="fas fa-quote-right q"></i><p class="t-text" data-i18n="client1_text">"تعاملت مع آدم في عدة مشاريع برمجية، وجدته محترفاً في حل المشاكل التقنية وسريع البديهة، يستخدم الذكاء الاصطناعي لتسريع العمل وتقديم حلول مبتكرة."</p><figcaption><h4 data-i18n="client1_name">ياسين بنعلي</h4><span data-i18n="client1_role">مدير مشاريع - الدار البيضاء، المغرب</span></figcaption></figure>
+            <figure class="testimonial"><i class="fas fa-quote-right q"></i><p class="t-text" data-i18n="client2_text">"واجه فريقنا خللاً برمجياً معقداً، وتمكن آدم من تشخيصه وحله بسرعة ودقة. استخدامه للذكاء الاصطناعي في العمل رفع إنتاجية الفريق بشكل واضح."</p><figcaption><h4 data-i18n="client2_name">محمد الكواري</h4><span data-i18n="client2_role">مدير تقني - الدوحة، قطر</span></figcaption></figure>
+            <figure class="testimonial"><i class="fas fa-quote-right q"></i><p class="t-text" data-i18n="client3_text">"آدم يجمع بين الخبرة البرمجية والدعم التقني بشكل نادر. وظّف أدوات الذكاء الاصطناعي لأتمتة المهام المتكررة، وحل مشاكلنا التقنية قبل أن تتفاقم."</p><figcaption><h4 data-i18n="client3_name">فهد القحطاني</h4><span data-i18n="client3_role">مدير عمليات - الرياض، السعودية</span></figcaption></figure>
+            <figure class="testimonial"><i class="fas fa-quote-right q"></i><p class="t-text" data-i18n="client4_text">"أثناء مشروع تطوير ودعم لأنظمتنا، أثبت آدم قدرة ممتازة على حل التحديات التقنية والبرمجية. سرعة استجابته وذكاؤه في استخدام الذكاء الاصطناعي كانا محل تقدير الفريق كله."</p><figcaption><h4 data-i18n="client4_name">حسن المحمود</h4><span data-i18n="client4_role">مدير تقنية المعلومات - المنامة، البحرين</span></figcaption></figure>
+            <figure class="testimonial"><i class="fas fa-quote-right q"></i><p class="t-text" data-i18n="client5_text">"عمل آدم معنا على مشروع ويب بمتطلبات معقدة، وقدّم حلولاً برمجية مبتكرة في وقت قياسي. أدواته الذكية جعلت سير العمل أسرع وأكثر دقة، وننصح بالتعامل معه."</p><figcaption><h4 data-i18n="client5_name">عمر الشامسي</h4><span data-i18n="client5_role">قائد فريق تطوير - دبي، الإمارات العربية المتحدة</span></figcaption></figure>
+  </div>
+</section>
+
+<section id="contact" class="section">
+  <div class="section-title"><h3 data-i18n="contact_title">تواصل معي</h3></div>
+  <div class="contact-options">
+    <a href="https://wa.me/212779088926" target="_blank" rel="noopener" class="contact-btn"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></a>
+    <a href="https://www.linkedin.com/in/adam-halym-3026343aa" target="_blank" rel="noopener" class="contact-btn"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
+    <a href="mailto:adam.halym.edu@gmail.com" class="contact-btn"><i class="fas fa-envelope"></i><span>Email</span></a>
+  </div>
+</section>
+
+<footer>
+  <h3 data-i18n="footer_contact">تواصل معي</h3>
+  <div class="social-icons">
+    <a href="https://www.linkedin.com/in/adam-halym-3026343aa" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    <a href="https://wa.me/212779088926" target="_blank" rel="noopener" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="mailto:adam.halym.edu@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+  </div>
+  <p data-i18n="footer_rights">&copy; 2026 آدم حليم. جميع الحقوق محفوظة.</p>
+</footer>
+
+<button id="toTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<script>
+        const translations = {
+            en: {
+                nav_about: "About", nav_experience: "Experience", nav_certifications: "Certifications",
+                nav_skills: "Skills", nav_contact: "Contact",
+                name: "Adam Halym",
+                linkedin: "LinkedIn",
+                about_btn: "About",
+                about_title: "About Me",
+                about_text: "I am Adam Halym, a distinguished professional in IT and Communications. I combine programming and web development skills, and I am skilled at using and applying artificial intelligence in the workplace to boost productivity and deliver innovative solutions. I have extensive experience in customer support and in solving complex technical and programming challenges, turning them into tangible results.",
+                experience_title: "Experience & Strong Projects",
+                exp1_title: "Integrating AI to Accelerate Customer Issue Resolution",
+                exp1_company: "Independent Project",
+                exp1_period: "2025 - Present",
+                exp1_desc1: "Using AI tools to analyze customer complaints and provide instant solutions.",
+                exp1_desc2: "Significantly reducing technical issue resolution time by automating responses.",
+                exp1_desc3: "Enhancing customer experience and increasing satisfaction rates through smart support.",
+                exp2_title: "Professional Remote Customer Support",
+                exp2_company: "Independent IT Services",
+                exp2_period: "2022 - Present",
+                exp2_desc1: "Providing instant remote technical support using tools like TeamViewer and AnyDesk.",
+                exp2_desc2: "Diagnosing and fixing software, OS, and network issues with high precision.",
+                exp2_desc3: "Achieving high customer satisfaction through rapid response and resolving complex technical issues.",
+                exp3_title: "High School Student Portal Development",
+                exp3_company: "Web Development Project",
+                exp3_period: "2024",
+                exp3_desc1: "Designing and developing a comprehensive digital platform for students and teachers.",
+                exp3_desc2: "Improving students' digital experience through a simple and easy-to-use interface.",
+                exp3_desc3: "Facilitating access to educational resources and school activities.",
+                exp4_title: "Personal Website Development & Optimization",
+                exp4_company: "Various Freelance Projects",
+                exp4_period: "2023 - Present",
+                exp4_desc1: "Developing and optimizing professional personal portfolios.",
+                exp4_desc2: "Improving website loading speeds and user experience (UI/UX).",
+                exp4_desc3: "Customizing designs to match each client's brand and requirements.",
+                certs_title: "Certifications",
+                skills_title: "Skills",
+                skill1: "Customer Support", skill2: "Corporate Communication", skill3: "Networking Basics",
+                skill4: "Problem Solving", skill5: "Cloud Computing", skill6: "Cybersecurity",
+                skill7: "Database Management", skill8: "Programming Basics",
+                testimonials_title: "Testimonials",
+                client1_name: "Yassine Benali", client1_role: "Project Manager - Casablanca, Morocco",
+                client1_text: "I worked with Adam on several software projects and found him a professional at solving technical problems and quick-witted. He uses artificial intelligence to speed up work and deliver innovative solutions.",
+                client2_name: "Mohammed Al-Kuwari", client2_role: "Technical Manager - Doha, Qatar",
+                client2_text: "Our team faced a complex software bug, and Adam diagnosed and fixed it quickly and precisely. His use of AI at work clearly boosted the team's productivity.",
+                client3_name: "Fahad Al-Qahtani", client3_role: "Operations Manager - Riyadh, Saudi Arabia",
+                client3_text: "Adam combines programming expertise and technical support in a rare way. He used AI tools to automate repetitive tasks and solved our technical issues before they escalated.",
+                client4_name: "Hassan Al-Mahmood", client4_role: "IT Director - Manama, Bahrain",
+                client4_text: "During a development and support project for our systems, Adam showed excellent ability to solve technical and programming challenges. His fast response and smart use of AI were appreciated by the whole team.",
+                client5_name: "Omar Al-Shamsi", client5_role: "Development Team Lead - Dubai, UAE",
+                client5_text: "Adam worked with us on a web project with complex requirements and delivered innovative code solutions in record time. His smart tools made our workflow faster and more accurate, and we highly recommend him.",
+                contact_title: "Contact Me",
+                footer_contact: "Contact Me",
+                footer_rights: "© 2026 Adam Halym. All rights reserved.",
+                typing: ["IT Expert", "Corporate Communication Specialist", "Customer Support Consultant"]
+            },
+            it: {
+                nav_about: "Chi Sono", nav_experience: "Esperienza", nav_certifications: "Certificazioni",
+                nav_skills: "Competenze", nav_contact: "Contatto",
+                name: "Adam Halym",
+                linkedin: "LinkedIn",
+                about_btn: "Chi Sono",
+                about_title: "Chi Sono",
+                about_text: "Sono Adam Halym, un professionista distintosi nel settore IT e Comunicazioni. Unisco competenze di programmazione e sviluppo web e so utilizzare e integrare l'intelligenza artificiale nell'ambiente di lavoro per aumentare la produttività e offrire soluzioni innovative. Ho una vasta esperienza nel supporto clienti e nella risoluzione di sfide tecniche e di programmazione complesse, trasformandole in risultati concreti.",
+                experience_title: "Esperienza e Progetti Forti",
+                exp1_title: "Integrazione dell'IA per accelerare la risoluzione dei problemi dei clienti",
+                exp1_company: "Progetto Indipendente",
+                exp1_period: "2025 - Presente",
+                exp1_desc1: "Utilizzo di strumenti di IA per analizzare i reclami dei clienti e fornire soluzioni immediate.",
+                exp1_desc2: "Riduzione significativa dei tempi di risoluzione dei problemi tecnici automatizzando le risposte.",
+                exp1_desc3: "Migliorare l'esperienza del cliente e aumentare i tassi di soddisfazione attraverso un supporto intelligente.",
+                exp2_title: "Supporto Clienti Remoto Professionale",
+                exp2_company: "Servizi IT Indipendenti",
+                exp2_period: "2022 - Presente",
+                exp2_desc1: "Fornitura di supporto tecnico remoto istantaneo utilizzando strumenti come TeamViewer e AnyDesk.",
+                exp2_desc2: "Diagnosi e riparazione di problemi software, sistemi operativi e reti con alta precisione.",
+                exp2_desc3: "Ottenere un'elevata soddisfazione del cliente attraverso risposte rapide e la risoluzione di problemi tecnici complessi.",
+                exp3_title: "Sviluppo del Portale Studenti per le Scuole Superiori",
+                exp3_company: "Progetto di Sviluppo Web",
+                exp3_period: "2024",
+                exp3_desc1: "Progettazione e sviluppo di una piattaforma digitale completa per studenti e insegnanti.",
+                exp3_desc2: "Migliorare l'esperienza digitale degli studenti attraverso un'interfaccia semplice e facile da usare.",
+                exp3_desc3: "Facilitare l'accesso alle risorse educative e alle attività scolastiche.",
+                exp4_title: "Sviluppo e Ottimizzazione di Siti Web Personali",
+                exp4_company: "Vari Progetti Freelance",
+                exp4_period: "2023 - Presente",
+                exp4_desc1: "Sviluppo e ottimizzazione di portfolio personali professionali.",
+                exp4_desc2: "Migliorare la velocità di caricamento dei siti web e l'esperienza utente (UI/UX).",
+                exp4_desc3: "Personalizzazione dei design per adattarli al marchio e ai requisiti di ogni cliente.",
+                certs_title: "Certificazioni",
+                skills_title: "Competenze",
+                skill1: "Supporto Clienti", skill2: "Comunicazione Aziendale", skill3: "Basi di Rete",
+                skill4: "Problem Solving", skill5: "Cloud Computing", skill6: "Cybersicurezza",
+                skill7: "Gestione Database", skill8: "Basi di Programmazione",
+                testimonials_title: "Testimonianze",
+                client1_name: "Yassine Benali", client1_role: "Project Manager - Casablanca, Marocco",
+                client1_text: "Ho lavorato con Adam su diversi progetti software e l'ho trovato professionale nella risoluzione dei problemi tecnici e molto pronto; usa l'intelligenza artificiale per velocizzare il lavoro e offrire soluzioni innovative.",
+                client2_name: "Mohammed Al-Kuwari", client2_role: "Manager Tecnico - Doha, Qatar",
+                client2_text: "Il nostro team ha affrontato un bug software complesso e Adam lo ha diagnosticato e risolto con rapidità e precisione. Il suo uso dell'IA nel lavoro ha migliorato chiaramente la produttività del team.",
+                client3_name: "Fahad Al-Qahtani", client3_role: "Responsabile Operazioni - Riad, Arabia Saudita",
+                client3_text: "Adam unisce in modo raro competenza di programmazione e supporto tecnico. Ha usato strumenti di IA per automatizzare attività ripetitive e ha risolto i nostri problemi tecnici prima che peggiorassero.",
+                client4_name: "Hassan Al-Mahmood", client4_role: "IT Director - Manama, Bahrein",
+                client4_text: "Durante un progetto di sviluppo e supporto dei nostri sistemi, Adam ha mostrato un'ottima capacità di risolvere sfide tecniche e di programmazione. La sua rapidità di risposta e l'uso intelligente dell'IA sono stati apprezzati da tutto il team.",
+                client5_name: "Omar Al-Shamsi", client5_role: "Team Lead Sviluppo - Dubai, Emirati Arabi Uniti",
+                client5_text: "Adam ha lavorato con noi a un progetto web con requisiti complessi e ha consegnato soluzioni di codice innovative in tempi record. I suoi strumenti intelligenti hanno reso il nostro flusso di lavoro più veloce e preciso; lo consigliamo vivamente.",
+                contact_title: "Contattami",
+                footer_contact: "Contattami",
+                footer_rights: "© 2026 Adam Halym. Tutti i diritti riservati.",
+                typing: ["Esperto IT", "Specialista in Comunicazione", "Consulente Supporto Clienti"]
+            },
+            fr: {
+                nav_about: "À Propos", nav_experience: "Expérience", nav_certifications: "Certifications",
+                nav_skills: "Compétences", nav_contact: "Contact",
+                name: "Adam Halym",
+                linkedin: "LinkedIn",
+                about_btn: "À Propos",
+                about_title: "À Propos de Moi",
+                about_text: "Je suis Adam Halym, un professionnel distingué dans le domaine de l'IT et des Communications. J'allie compétences en programmation et en développement web, et je sais utiliser et intégrer l'intelligence artificielle en milieu professionnel pour accroître la productivité et proposer des solutions innovantes. Je possède une vaste expérience en support client et en résolution de défis techniques et de programmation complexes, que je transforme en résultats concrets.",
+                experience_title: "Expérience et Projets Forts",
+                exp1_title: "Intégration de l'IA pour Accélérer la Résolution des Problèmes Clients",
+                exp1_company: "Projet Indépendant",
+                exp1_period: "2025 - Présent",
+                exp1_desc1: "Utilisation d'outils d'IA pour analyser les plaintes des clients et fournir des solutions instantanées.",
+                exp1_desc2: "Réduction significative du temps de résolution des problèmes techniques en automatisant les réponses.",
+                exp1_desc3: "Améliorer l'expérience client et augmenter les taux de satisfaction grâce à un support intelligent.",
+                exp2_title: "Support Client à Distance Professionnel",
+                exp2_company: "Services IT Indépendants",
+                exp2_period: "2022 - Présent",
+                exp2_desc1: "Fourniture d'un support technique à distance instantané à l'aide d'outils comme TeamViewer et AnyDesk.",
+                exp2_desc2: "Diagnostic et réparation de problèmes logiciels, systèmes d'exploitation et réseaux avec une grande précision.",
+                exp2_desc3: "Atteindre une haute satisfaction client grâce à une réponse rapide et à la résolution de problèmes techniques complexes.",
+                exp3_title: "Développement d'un Portail Étudiant pour Lycée",
+                exp3_company: "Projet de Développement Web",
+                exp3_period: "2024",
+                exp3_desc1: "Conception et développement d'une plateforme numérique complète pour les étudiants et les enseignants.",
+                exp3_desc2: "Améliorer l'expérience numérique des étudiants grâce à une interface simple et facile à utiliser.",
+                exp3_desc3: "Faciliter l'accès aux ressources éducatives et aux activités scolaires.",
+                exp4_title: "Développement et Optimisation de Sites Web Personnels",
+                exp4_company: "Divers Projets Freelance",
+                exp4_period: "2023 - Présent",
+                exp4_desc1: "Développement et optimisation de portfolios personnels professionnels.",
+                exp4_desc2: "Améliorer la vitesse de chargement des sites web et l'expérience utilisateur (UI/UX).",
+                exp4_desc3: "Personnalisation des designs pour correspondre à la marque et aux exigences de chaque client.",
+                certs_title: "Certifications",
+                skills_title: "Compétences",
+                skill1: "Support Client", skill2: "Communication d'Entreprise", skill3: "Bases de Réseaux",
+                skill4: "Résolution de Problèmes", skill5: "Cloud Computing", skill6: "Cybersécurité",
+                skill7: "Gestion de Bases de Données", skill8: "Bases de Programmation",
+                testimonials_title: "Témoignages",
+                client1_name: "Yassine Benali", client1_role: "Chef de Projet - Casablanca, Maroc",
+                client1_text: "J'ai travaillé avec Adam sur plusieurs projets de développement. Je l'ai trouvé professionnel dans la résolution des problèmes techniques et vif d'esprit ; il utilise l'intelligence artificielle pour accélérer le travail et proposer des solutions innovantes.",
+                client2_name: "Mohammed Al-Kuwari", client2_role: "Directeur Technique - Doha, Qatar",
+                client2_text: "Notre équipe faisait face à un bug logiciel complexe, qu'Adam a diagnostiqué et corrigé avec rapidité et précision. Son usage de l'IA au travail a nettement amélioré la productivité de l'équipe.",
+                client3_name: "Fahad Al-Qahtani", client3_role: "Directeur des Opérations - Riyad, Arabie Saoudite",
+                client3_text: "Adam allie expertise en programmation et support technique de façon rare. Il a utilisé des outils d'IA pour automatiser des tâches répétitives et résolu nos problèmes techniques avant qu'ils ne s'aggravent.",
+                client4_name: "Hassan Al-Mahmood", client4_role: "Directeur IT - Manama, Bahreïn",
+                client4_text: "Lors d'un projet de développement et de support de nos systèmes, Adam a démontré une excellente capacité à résoudre des défis techniques et de programmation. Sa réactivité et son usage intelligent de l'IA ont été salués par toute l'équipe.",
+                client5_name: "Omar Al-Shamsi", client5_role: "Chef d'Équipe Développement - Dubaï, Émirats Arabes Unis",
+                client5_text: "Adam a travaillé avec nous sur un projet web aux exigences complexes et a livré des solutions de code innovantes en un temps record. Ses outils intelligents ont rendu notre flux de travail plus rapide et plus précis ; nous le recommandons vivement.",
+                contact_title: "Contactez-Moi",
+                footer_contact: "Contactez-Moi",
+                footer_rights: "© 2026 Adam Halym. Tous droits réservés.",
+                typing: ["Expert IT", "Spécialiste en Communication", "Consultant Support Client"]
+            },
+            ar: {
+                nav_about: "عني", nav_experience: "الخبرات", nav_certifications: "الشهادات",
+                nav_skills: "المهارات", nav_contact: "تواصل",
+                name: "آدم حليم",
+                linkedin: "لينكد إن",
+                about_btn: "من أنا",
+                about_title: "نبذة عني",
+                about_text: "أنا آدم حليم، محترف متميز في مجال تكنولوجيا المعلومات والاتصالات. أجمع بين مهارات البرمجة وتطوير الويب، وأجيد استخدام وتوظيف الذكاء الاصطناعي في بيئة العمل لزيادة الإنتاجية وتقديم حلول مبتكرة. أمتلك خبرة واسعة في دعم العملاء وحل التحديات التقنية والبرمجية المعقدة لتحويلها إلى نتائج ملموسة.",
+                experience_title: "الخبرات والمشاريع القوية",
+                exp1_title: "إدراج الذكاء الاصطناعي لتسريع حل مشاكل العملاء",
+                exp1_company: "مشروع مستقل",
+                exp1_period: "2025 - حتى الآن",
+                exp1_desc1: "استخدام أدوات الذكاء الاصطناعي لتحليل شكاوى العملاء وتقديم حلول فورية.",
+                exp1_desc2: "تقليل وقت معالجة المشاكل التقنية بنسبة كبيرة عبر أتمتة الردود.",
+                exp1_desc3: "تحسين تجربة العملاء وزيادة معدل رضاهم من خلال الدعم الذكي.",
+                exp2_title: "حل مشاكل العملاء باحترافية (الدعم عن بُعد)",
+                exp2_company: "خدمات الدعم المستقل",
+                exp2_period: "2022 - حتى الآن",
+                exp2_desc1: "تقديم دعم فني فوري للعملاء عن بُعد باستخدام برامج مثل TeamViewer و AnyDesk.",
+                exp2_desc2: "تشخيص وإصلاح الأعطال البرمجية وأنظمة التشغيل والشبكات بدقة عالية.",
+                exp2_desc3: "تحقيق رضا العملاء من خلال سرعة الاستجابة وحل المشاكل التقنية المعقدة.",
+                exp3_title: "برمجة موقع لثانوية خاص بالتلاميذ",
+                exp3_company: "مشروع تطوير ويب",
+                exp3_period: "2024",
+                exp3_desc1: "تصميم وتطوير منصة رقمية متكاملة للطلاب والمعلمين.",
+                exp3_desc2: "تحسين تجربة التلاميذ الرقمية من خلال واجهة سهلة وبسيطة.",
+                exp3_desc3: "تسهيل الوصول إلى الموارد التعليمية والأنشطة المدرسية.",
+                exp4_title: "برمجة وتحسين المواقع الشخصية",
+                exp4_company: "مشاريع متنوعة (Freelance)",
+                exp4_period: "2023 - حتى الآن",
+                exp4_desc1: "تطوير وتحسين بورتفوليو شخصي وعارض أعمال (Portfolio) احترافي.",
+                exp4_desc2: "تحسين سرعة تحميل المواقع وتجربة المستخدم (UI/UX).",
+                exp4_desc3: "تخصيص التصاميم لتناسب هوية كل عميل ومتطلباته.",
+                certs_title: "الشهادات",
+                skills_title: "المهارات",
+                skill1: "دعم العملاء", skill2: "التواصل المؤسسي", skill3: "أساسيات الشبكات",
+                skill4: "حل المشاكل", skill5: "الحوسبة السحابية", skill6: "الأمن السيبراني",
+                skill7: "إدارة قواعد البيانات", skill8: "أساسيات البرمجة",
+                testimonials_title: "آراء العملاء",
+                client1_name: "ياسين بنعلي", client1_role: "مدير مشاريع - الدار البيضاء، المغرب",
+                client1_text: "\"تعاملت مع آدم في عدة مشاريع برمجية، وجدته محترفاً في حل المشاكل التقنية وسريع البديهة، يستخدم الذكاء الاصطناعي لتسريع العمل وتقديم حلول مبتكرة.\"",
+                client2_name: "محمد الكواري", client2_role: "مدير تقني - الدوحة، قطر",
+                client2_text: "\"واجه فريقنا خللاً برمجياً معقداً، وتمكن آدم من تشخيصه وحله بسرعة ودقة. استخدامه للذكاء الاصطناعي في العمل رفع إنتاجية الفريق بشكل واضح.\"",
+                client3_name: "فهد القحطاني", client3_role: "مدير عمليات - الرياض، السعودية",
+                client3_text: "\"آدم يجمع بين الخبرة البرمجية والدعم التقني بشكل نادر. وظّف أدوات الذكاء الاصطناعي لأتمتة المهام المتكررة، وحل مشاكلنا التقنية قبل أن تتفاقم.\"",
+                client4_name: "حسن المحمود", client4_role: "مدير تقنية المعلومات - المنامة، البحرين",
+                client4_text: "\"أثناء مشروع تطوير ودعم لأنظمتنا، أثبت آدم قدرة ممتازة على حل التحديات التقنية والبرمجية. سرعة استجابته وذكاؤه في استخدام الذكاء الاصطناعي كانا محل تقدير الفريق كله.\"",
+                client5_name: "عمر الشامسي", client5_role: "قائد فريق تطوير - دبي، الإمارات العربية المتحدة",
+                client5_text: "\"عمل آدم معنا على مشروع ويب بمتطلبات معقدة، وقدّم حلولاً برمجية مبتكرة في وقت قياسي. أدواته الذكية جعلت سير العمل أسرع وأكثر دقة، وننصح بالتعامل معه.\"",
+                contact_title: "تواصل معي",
+                footer_contact: "تواصل معي",
+                footer_rights: "© 2026 آدم حليم. جميع الحقوق محفوظة.",
+                typing: ["خبير تكنولوجيا المعلومات", "أخصائي تواصل مؤسسي", "مستشار دعم عملاء"]
+            }
+        };
+
+let currentLang = 'ar';
+
+function changeLanguage(lang) {
+    currentLang = lang;
+    const t = translations[lang];
+
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+    document.body.className = 'lang-' + lang;
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) el.textContent = t[key];
+    });
+
+    const langNames = { ar: 'عربي', en: 'English', fr: 'Français', it: 'Italiano' };
+    document.getElementById('current-lang-text').textContent = langNames[lang];
+
+    startTyping(t.typing);
+}
+
+const typingElement = document.getElementById('typed-text');
+let texts = translations[currentLang].typing;
+let textIndex = 0, charIndex = 0, isDeleting = false;
+
+function startTyping(newTexts) {
+    texts = newTexts; textIndex = 0; charIndex = 0; isDeleting = false;
+    clearTimeout(window.typingTimeout);
+    typeEffect();
+}
+
+function typeEffect() {
+    const currentText = texts[textIndex];
+    if (isDeleting) { typingElement.textContent = currentText.substring(0, charIndex - 1); charIndex--; }
+    else { typingElement.textContent = currentText.substring(0, charIndex + 1); charIndex++; }
+    let speed = isDeleting ? 50 : 100;
+    if (!isDeleting && charIndex === currentText.length) { speed = 2000; isDeleting = true; }
+    else if (isDeleting && charIndex === 0) { isDeleting = false; textIndex = (textIndex + 1) % texts.length; speed = 500; }
+    window.typingTimeout = setTimeout(typeEffect, speed);
+}
+
+// ============ Tabs ============
+let activeTab = 'experience';
+function showTab(name) {
+    activeTab = name;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === 'tab-' + name));
+    updateNav();
+}
+document.querySelectorAll('.tab-btn').forEach(b => b.addEventListener('click', () => showTab(b.dataset.tab)));
+document.querySelectorAll('.nav-links a[data-tab]').forEach(a => a.addEventListener('click', () => showTab(a.dataset.tab)));
+
+// ============ Active nav link ============
+const sectionsForNav = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+function updateNav() {
+    let current = '';
+    sectionsForNav.forEach(s => { if (window.scrollY >= s.offsetTop - 160) current = s.id; });
+    navLinks.forEach(link => {
+        const isTab = link.dataset.tab;
+        const on = isTab ? (current === 'showcase' && activeTab === isTab)
+                         : link.getAttribute('href') === '#' + current;
+        link.classList.toggle('active', on);
+    });
+}
+
+// ============ Back to top ============
+const toTopBtn = document.getElementById('toTop');
+window.addEventListener('scroll', () => {
+    toTopBtn.style.display = window.scrollY > 400 ? 'flex' : 'none';
+    updateNav();
+});
+toTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// إغلاق القائمة المنسدلة عند النقر خارجها
+document.addEventListener('click', function(event) {
+    const dropdown = document.querySelector('.lang-dropdown');
+    const content = document.querySelector('.lang-dropdown-content');
+    if (!dropdown.contains(event.target)) {
+        content.style.display = 'none';
+    } else {
+        if (event.target.closest('.lang-dropdown-btn')) {
+            content.style.display = content.style.display === 'block' ? 'none' : 'block';
+        }
+    }
+});
+
+window.onload = () => { changeLanguage('ar'); updateNav(); };
+</script>
+</body>
+</html>
