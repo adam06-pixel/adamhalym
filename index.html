@@ -86,13 +86,14 @@ a{color:inherit;text-decoration:none}
   border: 1px solid var(--glass-line); border-radius: 12px;
   z-index: 1001; overflow: hidden;
 }
+/* إظهار القائمة عند تفعيل الكلاس */
+.lang-dropdown.show .lang-dropdown-content { display: block; }
 .lang-dropdown-content a {
   color: var(--muted); padding: 10px 16px; text-decoration: none;
   display: block; font-size: 0.85rem; font-weight: 600; transition: 0.2s;
   text-align: center;
 }
 .lang-dropdown-content a:hover { background: var(--accent); color: var(--white); }
-.lang-dropdown:hover .lang-dropdown-content { display: block; }
 
 /* ===== Hero ===== */
 .hero{min-height:100vh;padding:120px 24px 60px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
@@ -231,7 +232,7 @@ footer p{margin-top:20px;font-size:.9rem}
     padding: 10px 12px; 
     gap: 8px;
     width: calc(100% - 20px);
-    flex-wrap: wrap; /* السماح بالالتفاف */
+    flex-wrap: wrap; 
     border-radius: 20px;
   }
   
@@ -239,7 +240,7 @@ footer p{margin-top:20px;font-size:.9rem}
 
   .nav-menu-wrapper {
     width: 100%;
-    flex-direction: column; /* وضع اللغة فوق والروابط تحت */
+    flex-direction: column; 
     gap: 8px;
   }
   
@@ -250,7 +251,7 @@ footer p{margin-top:20px;font-size:.9rem}
     scrollbar-width: none;
     padding-bottom: 2px;
     gap: 2px;
-    order: 2; /* الروابط في الأسفل */
+    order: 2; 
   }
   .nav-links::-webkit-scrollbar{display:none}
   .nav-links a{ padding: 6px 10px; font-size: 0.85rem; }
@@ -258,7 +259,7 @@ footer p{margin-top:20px;font-size:.9rem}
   .lang-dropdown { 
     width: 100%; 
     text-align: center; 
-    order: 1; /* زر اللغة في الأعلى */
+    order: 1; 
   }
   .lang-dropdown-btn { 
     width: 100%; 
@@ -304,9 +305,9 @@ footer p{margin-top:20px;font-size:.9rem}
   <a href="#home" class="logo">Adam<b>.</b></a>
   
   <div class="nav-menu-wrapper">
-    <!-- سيتم وضع زر اللغة فوق الروابط في الهاتف بفضل الـ CSS -->
-    <div class="lang-dropdown">
-      <button class="lang-dropdown-btn">
+    <!-- زر اللغة -->
+    <div class="lang-dropdown" id="langDropdown">
+      <button class="lang-dropdown-btn" id="langBtn">
         <i class="fas fa-globe"></i> <span id="current-lang-text">عربي</span>
       </button>
       <div class="lang-dropdown-content">
@@ -717,6 +718,9 @@ function changeLanguage(lang) {
     document.getElementById('current-lang-text').textContent = langNames[lang];
 
     startTyping(t.typing);
+    
+    // إغلاق القائمة بعد اختيار اللغة
+    document.getElementById('langDropdown').classList.remove('show');
 }
 
 const typingElement = document.getElementById('typed-text');
@@ -772,16 +776,20 @@ window.addEventListener('scroll', () => {
 });
 toTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-// إغلاق القائمة المنسدلة عند النقر خارجها
+// ============ Language Dropdown Logic ============
+const langDropdown = document.getElementById('langDropdown');
+const langBtn = document.getElementById('langBtn');
+
+langBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation(); // منع انتشار الحدث
+    langDropdown.classList.toggle('show');
+});
+
+// إغلاق القائمة عند النقر في أي مكان آخر في الصفحة
 document.addEventListener('click', function(event) {
-    const dropdown = document.querySelector('.lang-dropdown');
-    const content = document.querySelector('.lang-dropdown-content');
-    if (!dropdown.contains(event.target)) {
-        content.style.display = 'none';
-    } else {
-        if (event.target.closest('.lang-dropdown-btn')) {
-            content.style.display = content.style.display === 'block' ? 'none' : 'block';
-        }
+    if (!langDropdown.contains(event.target)) {
+        langDropdown.classList.remove('show');
     }
 });
 
