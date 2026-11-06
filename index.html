@@ -8,9 +8,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#030712; --white:#FFFFFF; --muted:#9CA3AF; --accent:#3B82F6;
-  --glass:rgba(255,255,255,.05); --glass-line:rgba(255,255,255,.12);
-  --card:#0b1220; --glow:0 0 28px rgba(59,130,246,.55);
+  --bg:#030712; 
+  --white:#FFFFFF; 
+  --muted:#9CA3AF; 
+  --accent:#3B82F6;
+  --glass:rgba(255,255,255,.05); 
+  --glass-line:rgba(255,255,255,.12);
+  --card:#0b1220; 
+  --glow:0 0 28px rgba(59,130,246,.55);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:110px}
@@ -223,38 +228,49 @@ footer p{margin-top:20px;font-size:.9rem}
 /* ===== Responsive ===== */
 @media(max-width:900px){
   .navbar{
-    padding: 8px 12px; 
-    gap: 5px;
+    padding: 10px 12px; 
+    gap: 8px;
     width: calc(100% - 20px);
-    flex-wrap: nowrap;
-    overflow-x: auto; /* يسمح بالتمرير الأفقي إذا ضاقت الشاشة */
-    scrollbar-width: none; /* إخفاء شريط التمرير */
+    flex-wrap: wrap; /* السماح بالالتفاف */
+    border-radius: 20px;
   }
-  .navbar::-webkit-scrollbar { display: none; }
   
-  .logo { display: none; } /* إخفاء الشعار لتوفير مساحة */
+  .logo { display: none; } 
 
   .nav-menu-wrapper {
     width: 100%;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    gap: 5px;
+    flex-direction: column; /* وضع اللغة فوق والروابط تحت */
+    gap: 8px;
   }
   
   .nav-links{
-    flex-wrap: nowrap;
+    width: 100%;
     overflow-x: auto;
+    justify-content: flex-start;
     scrollbar-width: none;
     padding-bottom: 2px;
     gap: 2px;
+    order: 2; /* الروابط في الأسفل */
   }
   .nav-links::-webkit-scrollbar{display:none}
   .nav-links a{ padding: 6px 10px; font-size: 0.85rem; }
   
-  .lang-dropdown { margin-inline-start: 5px; }
-  .lang-dropdown-btn { padding: 6px 10px; font-size: 0.8rem; }
+  .lang-dropdown { 
+    width: 100%; 
+    text-align: center; 
+    order: 1; /* زر اللغة في الأعلى */
+  }
+  .lang-dropdown-btn { 
+    width: 100%; 
+    justify-content: center; 
+    padding: 8px 10px;
+  }
+  .lang-dropdown-content { 
+    width: 100%; 
+    top: 100%;
+  }
 
-  .hero{padding-top:140px; padding-bottom: 40px; min-height: auto;}
+  .hero{padding-top:180px; padding-bottom: 40px; min-height: auto;}
   .hero-grid{display: flex; flex-direction: column; gap: 20px; text-align: center;}
   
   .card-stage{ order: -1; margin-bottom: 20px; }
@@ -287,16 +303,8 @@ footer p{margin-top:20px;font-size:.9rem}
 <nav class="navbar">
   <a href="#home" class="logo">Adam<b>.</b></a>
   
-  <!-- تجميع الروابط وزر اللغة في سطر واحد -->
   <div class="nav-menu-wrapper">
-    <ul class="nav-links">
-      <li><a href="#about" data-i18n="nav_about">عني</a></li>
-      <li><a href="#showcase" data-tab="experience" data-i18n="nav_experience">الخبرات</a></li>
-      <li><a href="#showcase" data-tab="certifications" data-i18n="nav_certifications">الشهادات</a></li>
-      <li><a href="#showcase" data-tab="skills" data-i18n="nav_skills">المهارات</a></li>
-      <li><a href="#contact" data-i18n="nav_contact">تواصل</a></li>
-    </ul>
-
+    <!-- سيتم وضع زر اللغة فوق الروابط في الهاتف بفضل الـ CSS -->
     <div class="lang-dropdown">
       <button class="lang-dropdown-btn">
         <i class="fas fa-globe"></i> <span id="current-lang-text">عربي</span>
@@ -308,6 +316,14 @@ footer p{margin-top:20px;font-size:.9rem}
         <a href="#" onclick="changeLanguage('it'); return false;">Italiano</a>
       </div>
     </div>
+
+    <ul class="nav-links">
+      <li><a href="#about" data-i18n="nav_about">عني</a></li>
+      <li><a href="#showcase" data-tab="experience" data-i18n="nav_experience">الخبرات</a></li>
+      <li><a href="#showcase" data-tab="certifications" data-i18n="nav_certifications">الشهادات</a></li>
+      <li><a href="#showcase" data-tab="skills" data-i18n="nav_skills">المهارات</a></li>
+      <li><a href="#contact" data-i18n="nav_contact">تواصل</a></li>
+    </ul>
   </div>
 </nav>
 
